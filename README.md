@@ -28,6 +28,9 @@ https://www.csselectronics.com/screen/page/can-dbc-file-database-intro/language/
 ##Model 3
 https://github.com/joshwardell/model3dbc
 
+Modifications:
+* RawBattCurrent132: https://teslaownersonline.com/threads/diagnostic-port-and-data-access.7502/post-298438
+
 
 ##Model 3 samples
 ```
@@ -39,6 +42,8 @@ https://github.com/joshwardell/model3dbc
 
 
 ```
+
+
 
 
 # ELM & STN

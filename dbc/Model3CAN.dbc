@@ -3235,7 +3235,7 @@ BO_ 264 ID108DIR_torque: 8 VehicleBus
 BO_ 306 ID132HVBattAmpVolt: 8 VehicleBus
  SG_ ChargeHoursRemaining132 : 48|12@1+ (1,0) [0|4095] "Min"  Receiver
  SG_ BattVoltage132 : 0|16@1+ (0.01,0) [0|655.35] "V"  Receiver
- SG_ RawBattCurrent132 : 32|16@1- (-0.05,500) [-1138.35|2138.4] "A"  Receiver
+ SG_ RawBattCurrent132 : 32|14@1- (-0.05,2) [-1138.35|2138.4] "A" Receiver
  SG_ SmoothBattCurrent132 : 16|16@1- (-0.1,0) [-3276.7|3276.7] "A"  Receiver
 
 BO_ 294 ID126RearHVStatus: 3 VehicleBus

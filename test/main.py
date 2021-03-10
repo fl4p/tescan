@@ -5,7 +5,7 @@
 
 import bluetooth
 
-from util import setup_custom_logger
+from tescan.util import setup_custom_logger
 
 logger = setup_custom_logger('bt')
 
