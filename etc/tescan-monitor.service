@@ -1,0 +1,14 @@
+[Unit]
+Description=tescan-monitor
+After=network.target bluetooth.target
+
+[Service]
+Environment=
+Type=simple
+User=pi
+WorkingDirectory=/home/pi/tescan
+ExecStart=/usr/bin/python3 monitor.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

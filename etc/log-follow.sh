@@ -1,0 +1,1 @@
+sudo journalctl -u tescan-monitor.service -f

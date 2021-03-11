@@ -1,8 +1,14 @@
+import json
 import socket
-# Device specific information
 
-from tescan.obd import ObdSocket
+from flask import Response
+
 from tescan.can import CANMonitor
+from tescan.obd import ObdSocket
+from tescan.record import Recorder
+
+
+# Device specific information
 
 
 def main():
@@ -15,7 +21,68 @@ def main():
     obd = ObdSocket(s)
     mon = CANMonitor(obd, dbc='dbc/Model3CAN.dbc')
 
-    mon.monitor(monitor_ids=(306, 599, 1010, 950, 850, 658, 978, 609, 692, 826, 708, 548, 532, 541, 612, 647, 691))
+    mon.monitor(monitor_ids=(
+        "ID132HVBattAmpVolt",  # 306
+        "ID352BMS_energyStatus",
+        "ID292BMS_SOC",  # SoC
+        "ID33AUI_rangeSOC",
+        "ID3F2BMSCounters",  # charging counters
+        "ID3D2TotalChargeDischarge",
+
+        "ID257UIspeed",  # driving speed
+        "ID3B6odometer",
+
+        "ID261_12vBattStatus",  # 609
+        "ID2B4PCS_dcdcRailStatus",  # 12V dcdc
+        "ID2C4PCS_logging",  # 708, lot of signals, PCS_dcdc12vSupportLifetimekWh
+
+        # "ID224PCSDCDCstatus", #548 no numbers
+        532,
+        # "ID21DCP_evseStatus", # no numbers
+        612,
+        # "ID287PTCcabinHeatSensorStatus", # not interessting
+        # "ID2B3VCRIGHT_logging1Hz" # hvac stuff, temps, not interessted atm
+
+        # "ID2F1VCFRONT_eFuseDebugStatus", # pump & air comp no usable numbers
+
+        "ID405VIN", # 1029
+    ))
+
+    from flask import Flask
+    app = Flask(__name__)
+
+    @app.route('/')
+    def hello_world():
+        return Response(json.dumps(mon.signal_values, sort_keys=True, indent=4), mimetype='application/json')
+
+        # return jsonify(mon.signal_values)
+
+    record_fields = {
+        "ID132HVBattAmpVolt": {"BattVoltage132", "ChargeHoursRemaining132", "RawBattCurrent132",
+                               "SmoothBattCurrent132"},
+        "ID214FastChargeVA": {"FC_dcCurrent", "FC_dcVoltage"},
+        "ID261_12vBattStatus": {"v12vBattCurrent261", "v12vBattVoltage261", },
+        "ID292BMS_SOC": {"BattBeginningOfLifeEnergy292", "SOCUI292"},
+        "ID2C4PCS_logging": {"PCS_5VNMax10s", "PCS_chgOutputV", "PCS_dcdc12vSupportLifetimekWh",
+                             "PCS_dcdcMaxLvOutputCurrent",
+                             "PCS_chgPhALifetimekWh", "PCS_chgPhBLifetimekWh", "PCS_chgPhCLifetimekWh", },
+        "ID2B4PCS_dcdcRailStatus": {"PCS_dcdcHvBusVolt", "PCS_dcdcLvBusVolt", "PCS_dcdcLvOutputCurrent"},
+        "ID33AUI_rangeSOC": {"UI_Range", "UI_SOC", "UI_ratedWHpM", },
+        "ID352BMS_energyStatus": {"BMS_nominalEnergyRemaining", "BMS_nominalFullPackEnergy"},
+        "ID3D2TotalChargeDischarge": {"TotalChargeKWh3D2", "TotalDischargeKWh3D2"},
+        "ID3F2BMSCounters": {"BMStotalACcharge3F2", "BMStotalDCcharge3F2", "BMStotalDriveDischarge3F2",
+                             "BMStotalRegenCharge3F2"},
+
+        # "ID2F1VCFRONT_eFuseDebugStatus": "todo", # TODO
+
+        # ID2E5FrontInverterPower TODO
+    }
+
+    rec = Recorder(mon, record_fields)
+    rec.start()
+
+    print('starting webserver...')
+    app.run(host='0.0.0.0')
 
 
 main()

@@ -13,10 +13,12 @@ class ObdSocket():
         obd.query("ATE0", expect="OK")
         # print("Connecting car ...")
         obd.query("ATSP0", expect="OK")
-        obd.query("ATH1", expect="OK")  # headers
+        obd.query("ATH1", expect="OK")  # enable headers
         obd.query("ATS0", expect="OK")
         obd.query("ATCAF0", expect="OK")
 
+
+        # check for advanced ST1110 command set
         self.device_name = obd.query("STDI")
         if self.device_name != '?':
             print('device', self.device_name)
@@ -29,6 +31,7 @@ class ObdSocket():
         else:
             self.st_commands = False
             print("Using ELM327 command set")
+            raise Exception('ST1110 command set currently required, ELM327-only is WIP')
 
     # def monitor_all(self):
     #    print('Monitor all')
@@ -60,7 +63,7 @@ class ObdSocket():
     def query(self, command: str, expect=None, fail=None):
         b = self.send(command)
         data = self.soc.recv(1024)
-        print('recv', data)
+        # print('recv', data)
 
         if data.startswith(b):
             data = data[len(b):]
@@ -68,7 +71,7 @@ class ObdSocket():
         data = data.lstrip(b'\r')
         while not data.endswith(b'>'):
             r = self.soc.recv(1024)
-            print('recv', r)
+            # print('recv', r)
             data += r
             # print('data', data, not data.endswith(b'\r\r'))
 

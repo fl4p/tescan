@@ -1,3 +1,6 @@
 pybluez
 obd
 cantools
+flask
+influxdb
+pytz

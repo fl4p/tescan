@@ -41,10 +41,39 @@ Modifications:
 306 70 96 AE FF 5C 26 FF 0F #batV=385.12 RawBattCurrent=9, SmoothBattCurrent=8.2, ChargeHRemain=4095
 
 
+# nteresting vles
+* battery: degradadion
+* charging
+ power consumption (dcdc, heater, drivetrain)
 ```
 
+
+# Interesting Frames
+* ID132HVBattAmpVolt # HV battery
+* ID214FastChargeVA
+* ID261_12vBattStatus
+* ID352BMS_energyStatus # HV battery capacity
+
+** Temperatures
 
 
 
 # ELM & STN
 https://www.scantool.net/downloads/98/stn1100-frpm.pdf
+
+
+# Systemd
+sudo cp tescan/etc/tescan-monitor.service /etc/systemd/system/
+
+
+# Influx
+
+```
+CREATE DATABASE tescan_mon
+CREATE USER tescan WITH PASSWORD 't3sc4n'
+GRANT ALL ON tescan_mon TO tescan
+```
+
+
+# TODO
+* fallback store to disk if influx na
