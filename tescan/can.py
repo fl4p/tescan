@@ -13,7 +13,7 @@ def hexstr2bytes(payload):
 
 
 class CANMonitor():
-    def __init__(self, obd: ObdSocket, dbc):
+    def __init__(self, obd: ObdSocket, dbc, dump_to_file=None):
         self.obd = obd
         self.db = cantools.db.load_file(dbc)
 
@@ -22,6 +22,8 @@ class CANMonitor():
 
         self.signal_values = defaultdict(dict)
         self._thread = None
+
+        self.dump_file = open(dump_to_file, 'wb') if dump_to_file else None
 
     def get_message(self, frame_id_or_name) -> cantools.database.Message:
         if not isinstance(frame_id_or_name, str):
@@ -71,6 +73,9 @@ class CANMonitor():
                         self._total_recv_frames += 1
                         self._total_recv_signals += len(signals)
 
+                        if self.dump_file:
+                            self.dump_file.write(chunk + b'\n')
+
                         # print(frame_id, hexstr, msg)
                     except Exception as e:
                         pass
@@ -95,4 +100,8 @@ class CANMonitor():
             self._thread = Thread(target=self._monitor_thread, daemon=True)
             self._thread.start()
 
-
+    def __del__(self):
+        if self.dump_file:
+            print('closing dump file...')
+            self.dump_file.close()
+            self.dump_file = None
