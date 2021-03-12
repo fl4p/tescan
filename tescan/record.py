@@ -14,7 +14,7 @@ logger = setup_custom_logger('rec')
 
 
 def is_near(a, b, eps):
-    return a == b or (abs(a - b) / abs(a or b) < eps)
+    return a == b or (abs(a - b) / abs(a or b)) < eps
 
 
 def now():
@@ -45,7 +45,7 @@ class Recorder:
         self.signals = signals
         self.last_sample = {}
         self.eps = 1e-4
-        self.interval = 8
+        self.interval = 1
 
         self.tss = TimeSeriesStore()
 

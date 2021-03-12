@@ -39,13 +39,15 @@ def main():
         # "ID224PCSDCDCstatus", #548 no numbers
         532,
         # "ID21DCP_evseStatus", # no numbers
-        612,
+        "ID264ChargeLineStatus",
+        "ID29DCP_dcChargeStatus",
         # "ID287PTCcabinHeatSensorStatus", # not interessting
         # "ID2B3VCRIGHT_logging1Hz" # hvac stuff, temps, not interessted atm
 
         # "ID2F1VCFRONT_eFuseDebugStatus", # pump & air comp no usable numbers
 
-        "ID405VIN", # 1029
+        "ID405VIN",  # 1029
+        "ID252BMS_powerAvailable", # 594
     ))
 
     from flask import Flask
@@ -58,6 +60,7 @@ def main():
         # return jsonify(mon.signal_values)
 
     record_fields = {
+        # TODO declare data type (int, float), eps, sampling interval
         "ID132HVBattAmpVolt": {"BattVoltage132", "ChargeHoursRemaining132", "RawBattCurrent132",
                                "SmoothBattCurrent132"},
         "ID214FastChargeVA": {"FC_dcCurrent", "FC_dcVoltage"},
@@ -72,6 +75,11 @@ def main():
         "ID3D2TotalChargeDischarge": {"TotalChargeKWh3D2", "TotalDischargeKWh3D2"},
         "ID3F2BMSCounters": {"BMStotalACcharge3F2", "BMStotalDCcharge3F2", "BMStotalDriveDischarge3F2",
                              "BMStotalRegenCharge3F2"},
+
+        "ID264ChargeLineStatus": {"ChargeLinePower264", "ChargeLineCurrentLimit264", "ChargeLineVoltage264",
+                                  "ChargeLineCurrent264"},
+
+        "ID252BMS_powerAvailable": {"BMS_maxDischargePower","BMS_maxRegenPower", },
 
         # "ID2F1VCFRONT_eFuseDebugStatus": "todo", # TODO
 

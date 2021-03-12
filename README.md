@@ -74,6 +74,15 @@ CREATE USER tescan WITH PASSWORD 't3sc4n'
 GRANT ALL ON tescan_mon TO tescan
 ```
 
+# Send CAN message (write)
+https://stackoverflow.com/questions/30983098/how-to-send-custom-can-messages-using-elm327
+https://www.instructables.com/Exploring-the-Tesla-Model-S-CAN-Bus/
+https://www.reddit.com/r/HackingTelsaMotors/comments/eroi0o/how_to_reverse_engineer_tesla_model_x_can_message/
 
 # TODO
 * fallback store to disk if influx na
+
+* test multiplexing (ac&dc charge total )  
+  https://cantools.readthedocs.io/en/latest/index.html?highlight=multiplex#cantools.database.can.Signal.multiplexer_signal
+http://socialledge.com/sjsu/index.php/DBC_Format#:~:text=DBC%20file%20is%20a%20proprietary,bytes%20of%20CAN%20message%20data.&text=Essentially%2C%20each%20%22message%22%20defined,members%20of%20the%20C%20structure.
+  
