@@ -54,6 +54,26 @@ Modifications:
 * ID261_12vBattStatus
 * ID352BMS_energyStatus # HV battery capacity
 
+* ESP_brakeTorqueTarget
+* ID219VCSEC_TPMSData
+* DI_gradeEst
+* ID383VCRIGHT_thsStatus
+
+* available battery power
+* CC_line1Voltage
+* AC charge current
+* PTC_leftCurrentHV
+
+* car orietnation (for sleeping)
+* ID2E5FrontInverterPower
+* ID214FastChargeVA
+* ID2A8CMPD_state
+
+* odo meter
+
+* VCRIGHT_hvacQdotLeft
+
+
 ** Temperatures
 
 
@@ -79,10 +99,18 @@ https://stackoverflow.com/questions/30983098/how-to-send-custom-can-messages-usi
 https://www.instructables.com/Exploring-the-Tesla-Model-S-CAN-Bus/
 https://www.reddit.com/r/HackingTelsaMotors/comments/eroi0o/how_to_reverse_engineer_tesla_model_x_can_message/
 
+#Can Multiplexingtest multiplexing (ac&dc charge total )  
+  https://cantools.readthedocs.io/en/latest/index.html?highlight=multiplex#cantools.database.can.Signal.multiplexer_signal
+  http://socialledge.com/sjsu/index.php/DBC_Format#:~:text=DBC%20file%20is%20a%20proprietary,bytes%20of%20CAN%20message%20data.&text=Essentially%2C%20each%20%22message%22%20defined,members%20of%20the%20C%20structure.
+  
+
+#Display
+https://github.com/adafruit/Adafruit_CircuitPython_RGB_Display
+
+apt install libjpeg-dev # for Pillow
+
 # TODO
 * fallback store to disk if influx na
+* tesla joystick! ( use steering wheel and pedal to control games)
 
-* test multiplexing (ac&dc charge total )  
-  https://cantools.readthedocs.io/en/latest/index.html?highlight=multiplex#cantools.database.can.Signal.multiplexer_signal
-http://socialledge.com/sjsu/index.php/DBC_Format#:~:text=DBC%20file%20is%20a%20proprietary,bytes%20of%20CAN%20message%20data.&text=Essentially%2C%20each%20%22message%22%20defined,members%20of%20the%20C%20structure.
-  
+

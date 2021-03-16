@@ -4,3 +4,5 @@ cantools
 flask
 influxdb
 pytz
+adafruit-circuitpython-rgb-display
+Pillow

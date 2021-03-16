@@ -76,7 +76,7 @@ class ObdSocket():
             # print('data', data, not data.endswith(b'\r\r'))
 
         data = data[:-1].strip(b'\r')
-        print('data', data)
+        #print('data', data)
 
         if expect:
             excp = bytes(expect, 'ascii')

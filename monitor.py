@@ -47,7 +47,21 @@ def main():
         # "ID2F1VCFRONT_eFuseDebugStatus", # pump & air comp no usable numbers
 
         "ID405VIN",  # 1029
-        "ID252BMS_powerAvailable", # 594
+        "ID252BMS_powerAvailable",  # 594
+
+        "ID108DIR_torque",
+        "ID186DIF_torque",
+        "ID111RCM_inertial2",
+        #"ID3F3UI_odo", # no data
+        "ID267DI_vehicleEstimates",
+        "ID287PTCcabinHeatSensorStatus",
+        "ID334UI_powertrainControl",
+        "ID3BBUI_power",
+        "ID336MaxPowerRating",
+        "ID268SystemPower",
+        "ID321VCFRONT_sensors",
+        "ID3D8Elevation",
+        "ID2A8CMPD_state",
     ))
 
     from flask import Flask
@@ -79,8 +93,23 @@ def main():
         "ID264ChargeLineStatus": {"ChargeLinePower264", "ChargeLineCurrentLimit264", "ChargeLineVoltage264",
                                   "ChargeLineCurrent264"},
 
-        "ID252BMS_powerAvailable": {"BMS_maxDischargePower","BMS_maxRegenPower", },
+        "ID252BMS_powerAvailable": {"BMS_maxDischargePower", "BMS_maxRegenPower", },
 
+        "ID108DIR_torque": {"DIR_axleSpeed", "DIR_torqueActual"},
+        "ID186DIF_torque": {"DIF_axleSpeed", "DIF_torqueActual"},
+        "ID111RCM_inertial2": {"RCM_lateralAccel", "RCM_longitudinalAccel", "RCM_verticalAccel"},
+
+        "ID29DCP_dcChargeStatus": {"CP_evseOutputDcCurrent", "CP_evseOutputDcVoltage"},
+        #"ID3F3UI_odo": {"UI_odometer"},
+        "ID267DI_vehicleEstimates": {"DI_mass"},
+
+        "ID287PTCcabinHeatSensorStatus": {"PTC_leftCurrentHV", "PTC_rightCurrentHV", "PTC_voltageHV"},
+
+        "ID334UI_powertrainControl": {"UI_systemPowerLimit", "UI_systemTorqueLimit"},
+
+        "ID321VCFRONT_sensors": {"VCFRONT_tempAmbient", "VCFRONT_tempAmbientFiltered"},
+
+        "ID3D8Elevation": {"Elevation3D8"},
         # "ID2F1VCFRONT_eFuseDebugStatus": "todo", # TODO
 
         # ID2E5FrontInverterPower TODO

@@ -1,3 +1,4 @@
+import time
 from collections import defaultdict
 from threading import Thread
 
@@ -72,6 +73,7 @@ class CANMonitor():
                         self.signal_values[msg.name].update(signals)
                         self._total_recv_frames += 1
                         self._total_recv_signals += len(signals)
+                        self._last_msg_time = time.time()
 
                         if self.dump_file:
                             self.dump_file.write(chunk + b'\n')
@@ -96,9 +98,13 @@ class CANMonitor():
         self.signal_values.clear()
 
         if not self._thread:
-            print('starting monitor threadx')
+            print('starting monitor thread')
             self._thread = Thread(target=self._monitor_thread, daemon=True)
             self._thread.start()
+
+    @property
+    def last_frame_time(self):
+        return self._last_msg_time
 
     def __del__(self):
         if self.dump_file:

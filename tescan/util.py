@@ -1,4 +1,7 @@
 import logging
+import os
+import sys
+import time
 from logging import Formatter
 
 _loggers = {}
@@ -50,3 +53,13 @@ def setup_custom_logger(name, log_level=logging.INFO):
     _loggers[name] = logger_
 
     return logger_
+
+
+# noinspection PyProtectedMember
+def exit_process(is_error=True):
+    from threading import Thread
+    import _thread
+    status = 1 if is_error else 0
+    Thread(target=lambda: (time.sleep(3), _thread.interrupt_main()), daemon=True).start()
+    Thread(target=lambda: (time.sleep(6), os._exit(status)), daemon=True).start()
+    sys.exit(status)
