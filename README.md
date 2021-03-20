@@ -73,6 +73,9 @@ Modifications:
 
 * VCRIGHT_hvacQdotLeft
 
+* VCRIGHT_hvacCabinHumidityLevel
+VCRIGHT_thsHumidity
+
 
 ** Temperatures
 
@@ -110,6 +113,8 @@ https://github.com/adafruit/Adafruit_CircuitPython_RGB_Display
 apt install libjpeg-dev # for Pillow
 
 # TODO
+* use car clock for system clock (and point timestamps)
+* detect car shutdown sequence and prepare poweroff
 * fallback store to disk if influx na
 * tesla joystick! ( use steering wheel and pedal to control games)
 

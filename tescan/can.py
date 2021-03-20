@@ -1,9 +1,11 @@
+import datetime
 import time
 from collections import defaultdict
 from threading import Thread
 
 import cantools
 import cantools.database
+import pytz
 
 from tescan.obd import ObdSocket
 
@@ -38,11 +40,22 @@ class CANMonitor():
             sig = self.signal_values['ID405VIN']
             vin1 = int(sig['VINA405']).to_bytes(8, 'little')
             assert vin1.startswith(b'\x00\x00\x00')
-            vin = vin1 + int(sig['VINB405']).to_bytes(8, 'little')+ int(sig['VINC405']).to_bytes(8, 'little')
+            vin = vin1 + int(sig['VINB405']).to_bytes(8, 'little') + int(sig['VINC405']).to_bytes(8, 'little')
             vin = vin.replace(b'\x00', b'')
             return vin.decode('ascii')
         except KeyError:
             return None
+
+    def unix_time(self):
+        try:
+            ts = self.signal_values['ID528UnixTime']['UnixTimeSeconds528']
+            assert isinstance(ts, int)
+            return datetime.datetime.fromtimestamp(ts).astimezone(pytz.utc)
+        except KeyError:
+            return None
+
+    def vehicle_status(self):
+        return self.signal_values.get('ID2E1VCFRONT_status', {}).get('VCFRONT_vehicleStatusDBG', None)
 
     def _monitor_thread(self):
         obd = self.obd
@@ -107,7 +120,7 @@ class CANMonitor():
         return self._last_msg_time
 
     def __del__(self):
-        if self.dump_file:
+        if hasattr(self, 'dump_file') and self.dump_file:
             print('closing dump file...')
             self.dump_file.close()
             self.dump_file = None

@@ -1,15 +1,14 @@
 import datetime
-import queue
 import time
 import traceback
 from threading import Thread
 from typing import Dict
 
 import pytz
-from influxdb import InfluxDBClient
 
 from tescan.can import CANMonitor
-from tescan.util import setup_custom_logger, exit_process
+from tescan.store import TimeSeriesStore
+from tescan.util import setup_custom_logger
 
 logger = setup_custom_logger('rec')
 
@@ -22,58 +21,28 @@ def now():
     return datetime.datetime.utcnow().replace(tzinfo=pytz.utc)
 
 
-class TimeSeriesStore():
-    def __init__(self, write_interval=20):
-        import urllib3
-        urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
-
-        self.client = InfluxDBClient('influx.fabi.me', 8086, 'tescan', 't3sc4n', 'tescan_mon', ssl=True)
-        self.queue = queue.Queue()
-        self.write_interval = write_interval
-        self._write_thread = Thread(target=self._write_loop, daemon=True)
-        self._write_thread.start()
-
-    def write(self, measurement, time: datetime.datetime, tags, data):
-        if not data:
-            return False
-        self.queue.put({
-            "measurement": measurement,
-            "tags": tags,
-            "time": time.isoformat(),
-            "fields": data,
-        })
-        return True
-
-    def _write_loop(self):
-        while True:
-            points = []
-            while not self.queue.empty() and len(points) < 20_000:
-                points.append(self.queue.get())
-            try:
-                if points:
-                    self.client.write_points(points, time_precision='ms')
-                    print('tss wrote', len(points), 'points with', sum(map(len, points)), 'fields')
-            except (Exception, IOError) as e:
-                print(type(e), 'error writing', len(points), 'points', e)
-                for p in points:
-                    self.queue.put(p)
-                print('re-queued', len(points), 'points, qsize=', self.queue.qsize())
-                time.sleep(self.write_interval * 4)
-            time.sleep(self.write_interval)
-
-
 class Recorder:
 
-    def __init__(self, can: CANMonitor, signals: Dict[str, set]):
+    def __init__(self, can: CANMonitor, signals: Dict[str, set], on_timeout=None):
+        self.thread = Thread(target=self._thread_body, daemon=True)
         self.can = can
         self.signals = signals
+
         self.last_sample = {}
+        self.last_ts = None
+        self.last_vehicle_status = None
+
         self.eps = 1e-4
         self.interval = 1
 
-        self.last_change_time = time.time()
+        self.timeout_timer = time.time() + 30
+
+        self.on_timeout = on_timeout
 
         self.tss = TimeSeriesStore()
+
+    def flush(self):
+        self.tss.flush()
 
     def sample(self):
         vin = self.can.vin()
@@ -82,28 +51,38 @@ class Recorder:
             return
 
         if not self.last_sample:
-            logger.warn('VIN #%s', vin)
+            time.sleep(.2)
+            logger.warn('VIN #%s  UnixTime=%s Status=%s', vin, self.can.unix_time(), self.can.vehicle_status())
 
         sample = {}
         for frame_name, signal_names in self.signals.items():
             frame_signals = self.can.signal_values[frame_name]
             sample.update({k: v for k, v in frame_signals.items() if k in signal_names or signal_names == '*'})
 
+        ts = self.can.unix_time()
         last = self.last_sample
         for k in list(sample.keys()):
             if k in last and is_near(last[k], sample[k], self.eps):
                 del sample[k]
 
-        if sample:
-            self.last_change_time = time.time()
+        if not ts or ts == self.last_ts:
+            print('NO timestamp, skip sample', ts, self.last_ts)
+        elif sample:
+            self.timeout_timer = time.time() + 30
             print('sample', time.time(), len(sample), str(sample)[:60])
             self.last_sample.update(sample)
-            self.tss.write('sample', now(), tags={'vin': vin}, data=sample)
+            self.last_ts = ts
+            self.tss.write('sample', ts, tags={'vin': vin}, data=sample)
         else:
-            print('EMPTY sample, last change', round(time.time() - self.last_change_time), 's ago')
+            print('EMPTY sample, timeout', self.timeout_timer, 's ago')
+
+        vehicle_status = self.can.vehicle_status()
+        if vehicle_status != self.last_vehicle_status:
+            logger.warn('Flushing tss on status change %s -> %s', self.last_vehicle_status, vehicle_status)
+            self.tss.flush()
+            self.last_vehicle_status = vehicle_status
 
     def start(self):
-        self.thread = Thread(target=self._thread_body, daemon=True)
         self.thread.start()
 
     def _thread_body(self):
@@ -114,9 +93,9 @@ class Recorder:
             except Exception as e:
                 logger.error('Error sampling: %s %s', e, traceback.format_exc())
 
-            if (time.time() - self.last_change_time) > 30:
-                logger.error('No data change for 30s! EXITING PROCESS')
-                exit_process()
-                # raise Exception('Sample timeout')
+            if time.time() > self.timeout_timer:
+                logger.error('No data change for 30s!')
+                self.on_timeout and self.on_timeout()
+                self.timeout_timer = time.time() + 30
 
             time.sleep(self.interval)
