@@ -71,7 +71,8 @@ class TimeSeriesStore():
         if points:
             try:
                 self.client.write_points(points, time_precision='ms')
-            except:
+            except Exception as e:
+                print('Error %s flush write, using fallback' % e)
                 self.fallback.write(points, sync=True)
 
 
