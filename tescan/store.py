@@ -14,7 +14,8 @@ class TimeSeriesStore():
         import urllib3
         urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-        self.client = InfluxDBClient('influx.fabi.me', 8086, 'tescan', 't3sc4n', 'tescan_mon', ssl=True)
+        self.client = InfluxDBClient('influx.fabi.me', 8086, 'tescan', 't3sc4n', 'tescan_mon', ssl=True, retries=1,
+                                     timeout=10)
         self.queue = queue.Queue()
         self.write_interval = write_interval
         self._write_thread = Thread(target=self._write_loop, daemon=True)
@@ -93,7 +94,7 @@ class FallbackStore():
     def write(self, points, sync=False):
         uid = str(uuid.uuid4()).split('-')[-1]
         fp = os.path.join(self.dir, str(time.time()) + uid + '.pkl')
-        with open(fp , 'wb') as fh:
+        with open(fp, 'wb') as fh:
             pickle.dump(points, fh, pickle.HIGHEST_PROTOCOL)
 
         if sync:

@@ -117,5 +117,4 @@ apt install libjpeg-dev # for Pillow
 * detect car shutdown sequence and prepare poweroff
 * fallback store to disk if influx na
 * tesla joystick! ( use steering wheel and pedal to control games)
-
-
+* two-layer storage with never mem-only
