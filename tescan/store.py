@@ -88,9 +88,12 @@ class FallbackStore():
         print('Found ', len(pickles), 'pkl files')
 
         for pkl in pickles:
-            with open(pkl, 'rb') as fh:
-                d = pickle.load(fh)
-                print(pkl, len(d), type(d))
+            try:
+                with open(pkl, 'rb') as fh:
+                    d = pickle.load(fh)
+                    print(pkl, len(d), type(d))
+            except Exception as e:
+                print('error loading pickle %s: %s' % (pkl, e))
 
     def write(self, points, sync=False):
         uid = str(uuid.uuid4()).split('-')[-1]

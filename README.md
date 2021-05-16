@@ -22,6 +22,8 @@ https://www.csselectronics.com/screen/page/simple-intro-to-can-bus/language/en
 
 https://python-can.readthedocs.io/en/master/
 
+https://m0agx.eu/2017/12/27/reading-obd2-data-without-elm327-part-1-can/
+
 DBC
 https://www.csselectronics.com/screen/page/can-dbc-file-database-intro/language/en
 
@@ -69,6 +71,8 @@ Modifications:
 * ID214FastChargeVA
 * ID2A8CMPD_state
 
+CP_doorI
+
 * odo meter
 
 * VCRIGHT_hvacQdotLeft
@@ -112,9 +116,23 @@ https://github.com/adafruit/Adafruit_CircuitPython_RGB_Display
 
 apt install libjpeg-dev # for Pillow
 
+# Sleep Mode
+https://www.reddit.com/r/teslamotors/comments/ip2z17/controlling_teslas_sleep_mode_or_lucid_dreaming/
+
+# Control
+* Windows
+* Seats positions
+* Profiles (window state & seat state)
+* Headlight
+* all HVAC controls
+
 # TODO
 * use car clock for system clock (and point timestamps)
 * detect car shutdown sequence and prepare poweroff
 * fallback store to disk if influx na
 * tesla joystick! ( use steering wheel and pedal to control games)
 * two-layer storage with never mem-only
++ startup guard
+* odometer!
+* vehicle state
+* FM transmitter https://circuitdigest.com/microcontroller-projects/raspberry-pi-fm-transmitter

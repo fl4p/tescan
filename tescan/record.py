@@ -69,7 +69,7 @@ class Recorder:
             print('NO timestamp, skip sample', ts, self.last_ts)
         elif sample:
             self.timeout_timer = time.time() + 30
-            print('sample', time.time(), len(sample), str(sample)[:60])
+            # print('sample', time.time(), len(sample), str(sample)[:60])
             self.last_sample.update(sample)
             self.last_ts = ts
             self.tss.write('sample', ts, tags={'vin': vin}, data=sample)

@@ -22,7 +22,7 @@ def main():
     obd = ObdSocket(s)
     mon = CANMonitor(obd, dbc='dbc/Model3CAN.dbc')
 
-    mon.monitor(monitor_ids=(
+    monitor_ids = {
         "ID132HVBattAmpVolt",  # 306
         "ID352BMS_energyStatus",
         "ID292BMS_SOC",  # SoC
@@ -38,7 +38,7 @@ def main():
         "ID2C4PCS_logging",  # 708, lot of signals, PCS_dcdc12vSupportLifetimekWh
 
         # "ID224PCSDCDCstatus", #548 no numbers
-        532,
+        "ID214FastChargeVA",
         # "ID21DCP_evseStatus", # no numbers
         "ID264ChargeLineStatus",
         "ID29DCP_dcChargeStatus",
@@ -68,17 +68,8 @@ def main():
 
         "ID383VCRIGHT_thsStatus",
         "ID263VCRIGHT_logging10Hz",
-        "ID20CVCRIGHT_hvacRequest"
-    ))
-
-    from flask import Flask
-    app = Flask(__name__)
-
-    @app.route('/')
-    def hello_world():
-        return Response(json.dumps(mon.signal_values, sort_keys=True, indent=4), mimetype='application/json')
-
-        # return jsonify(mon.signal_values)
+        "ID20CVCRIGHT_hvacRequest",
+    }
 
     record_fields = {
         # TODO declare data type (int, float), eps, sampling interval
@@ -123,7 +114,17 @@ def main():
         "ID321VCFRONT_sensors": {"VCFRONT_tempAmbient", "VCFRONT_tempAmbientFiltered"},
 
         "ID3D8Elevation": {"Elevation3D8"},
-        # "ID2F1VCFRONT_eFuseDebugStatus": "todo", # TODO
+        "ID2F1VCFRONT_eFuseDebugStatus": {
+            "VCFRONT_chargedIBSAmpHours", "VCFRONT_dischargedIBSAmpHours",
+            "VCFRONT_headlampLeftCurrent", "VCFRONT_headlampLeftVoltage",
+            "VCFRONT_headlampRightCurrent", "VCFRONT_headlampRightVoltage",
+            "VCFRONT_iBoosterCurrent", "VCFRONT_iBoosterVoltage",
+            "VCFRONT_pump1AndFanCurrent", "VCFRONT_pump1AndFanCurrent",
+            "VCFRONT_pump2AndAirCompCurrent", "VCFRONT_pump2AndAirCompVoltage",
+            "VCFRONT_sleepBypassCurrent", "VCFRONT_sleepBypassVoltage",
+            "VCFRONT_uiAudioCurrent",
+            "VCFRONT_uiCurrent",
+        },
 
         # ID2E5FrontInverterPower TODO
 
@@ -136,7 +137,36 @@ def main():
                                     "VCRIGHT_hvacQdotLeft", "VCRIGHT_hvacQdotRight"},
         "ID20CVCRIGHT_hvacRequest": {"VCRIGHT_wattsDemandEvap", "VCRIGHT_tempAmbientRaw", "VCRIGHT_tempEvaporator",
                                      "VCRIGHT_tempEvaporatorTarget"},
+
+        "ID282VCLEFT_hvacBlowerFeedback": {"VCLEFT_hvacBlowerIPhase0", "VCLEFT_hvacBlowerIPhase1",
+                                           "VCLEFT_hvacBlowerIPhase2"},
+
+        "ID2B3VCRIGHT_logging1Hz": {
+            "VCRIGHT_cabinTempFanCurrent",
+            "VCRIGHT_evapLoadInFresh", "VCRIGHT_evapLoadInRecirc",
+            "VCRIGHT_ptcHeaterPwrDemandLeft", "VCRIGHT_ptcHeaterPwrDemandRight",
+            "VCRIGHT_wattsHeaterLeftTotal", "VCRIGHT_wattsHeaterRightTotal",
+
+        },
+
+        "ID381VCFRONT_logging1Hz": {
+            "VCFRONT_chillerPassiveCoolPower",
+            "VCFRONT_estCompPower",
+        },
     }
+
+    mon.monitor(monitor_ids=set(monitor_ids | set(record_fields.keys())))
+
+    from flask import Flask
+    app = Flask(__name__)
+
+    @app.route('/')
+    def hello_world():
+        return Response(json.dumps(mon.signal_values, sort_keys=True, indent=4), mimetype='application/json')
+
+        # return jsonify(mon.signal_values)
+
+    rec = None
 
     def on_timeout():
         try:
@@ -148,7 +178,8 @@ def main():
 
     def on_exit(*args, **kwargs):
         print('exit signal handler...')
-        rec.flush()
+        if rec:
+            rec.flush()
         exit_process()
 
     atexit.register(on_exit)
