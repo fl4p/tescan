@@ -77,10 +77,14 @@ class TimeSeriesStore():
 
 
 class FallbackStore():
+
+
     def __init__(self, dir='data/fbs'):
         self.dir = os.path.abspath(dir)
         os.makedirs(self.dir, exist_ok=True)
 
+
+    def _find_pickles(self):
         import glob
 
         pickles = glob.glob(self.dir + '/*.pkl')

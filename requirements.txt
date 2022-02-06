@@ -1,3 +1,4 @@
+setuptools==57. # error in PyBluez setup command: use_2to3 is invalid.
 pybluez
 obd
 cantools
@@ -6,3 +7,10 @@ influxdb
 pytz
 adafruit-circuitpython-rgb-display
 Pillow
+
+# mac:
+# pyobjc # mac lightblue
+# $ xcode-select --install
+
+
+

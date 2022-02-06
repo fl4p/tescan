@@ -6,7 +6,7 @@ from typing import Dict
 
 import pytz
 
-from tescan.can import CANMonitor
+from tescan.monitor import CANMonitor
 from tescan.store import TimeSeriesStore
 from tescan.util import setup_custom_logger
 

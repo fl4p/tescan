@@ -126,13 +126,34 @@ https://www.reddit.com/r/teslamotors/comments/ip2z17/controlling_teslas_sleep_mo
 * Headlight
 * all HVAC controls
 
+
+# Pican
+Follow pican user manual
+
+To auto bring-up the can network on booot:
+```
+sudo nano /etc/systemd/network/80-can.network
+[Match]
+Name=can*
+
+[CAN]
+BitRate=500K
+```
+
+and enable the networkign service
+`sudo systemctl enable systemd-networkd.service`
+
 # TODO
 * use car clock for system clock (and point timestamps)
 * detect car shutdown sequence and prepare poweroff
-* fallback store to disk if influx na
 * tesla joystick! ( use steering wheel and pedal to control games)
 * two-layer storage with never mem-only
 + startup guard
-* odometer!
 * vehicle state
 * FM transmitter https://circuitdigest.com/microcontroller-projects/raspberry-pi-fm-transmitter
+
+
+* new DBC
+- ID1D6DI_limits
+- ID22AHVP_pcsControl
+- UI_stop12vSupport

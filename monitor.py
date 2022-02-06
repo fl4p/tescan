@@ -5,21 +5,27 @@ import socket
 
 from flask import Response
 
-from tescan.can import CANMonitor
+from tescan.can import CanSocket
+from tescan.monitor import CANMonitor
 from tescan.obd import ObdSocket
 from tescan.record import Recorder
 # Device specific information
 from tescan.util import exit_process
 
 
-def main():
+def bluetooth_socket():
     m5stick_addr = '00:04:3E:96:97:47'
     port = 1  # This needs to match M5Stick setting
 
-    s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
-    s.connect((m5stick_addr, port))
+    #s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+    #s.connect((m5stick_addr, port))
 
-    obd = ObdSocket(s)
+    #obd = ObdSocket(s)
+
+def main():
+
+    # obd = CanSocket()
+    obd = bluetooth_socket()
     mon = CANMonitor(obd, dbc='dbc/Model3CAN.dbc')
 
     monitor_ids = {
@@ -35,7 +41,6 @@ def main():
 
         "ID261_12vBattStatus",  # 609
         "ID2B4PCS_dcdcRailStatus",  # 12V dcdc
-        "ID2C4PCS_logging",  # 708, lot of signals, PCS_dcdc12vSupportLifetimekWh
 
         # "ID224PCSDCDCstatus", #548 no numbers
         "ID214FastChargeVA",
@@ -152,6 +157,10 @@ def main():
         "ID381VCFRONT_logging1Hz": {
             "VCFRONT_chillerPassiveCoolPower",
             "VCFRONT_estCompPower",
+        },
+
+        "ID3B6odometer": {
+            "Odometer3B6",
         },
     }
 

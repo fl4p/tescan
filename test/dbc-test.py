@@ -5,6 +5,9 @@ db = cantools.db.load_file('./dbc/Model3CAN.dbc')
 msg = db.get_message_by_frame_id(306)
 print(len(msg.signals))
 
+msg = db.decode_message(306,  bytearray(b"Y\x92\xf6\xff\'@\xff\x0f"))
+print(msg)
+
 #msg =  db.decode_message(306, b'C695150064402B00')
 #print(msg)
 

@@ -87,3 +87,4 @@ class ObdSocket():
             assert data != fail, "fail"
 
         return data
+
