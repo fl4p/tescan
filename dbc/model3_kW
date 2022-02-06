@@ -1,0 +1,32 @@
+ SG_ BMS_chgPowerAvailable : 40|11@1+ (0.125,0) [0|255.75] "kW"  Receiver
+ SG_ UI_systemPowerLimit : 0|5@1+ (20,20) [20|640] "kW"  Receiver
+ SG_ UI_powerExpected : 0|8@1+ (1,0) [0|100] "kW"  Receiver
+ SG_ UI_powerIdeal : 8|8@1+ (1,0) [0|100] "kW"  Receiver
+ SG_ DIR_sysHeatPowerOptimal m50 : 16|8@1+ (0.08,0) [0|20] "kW"  Receiver
+ SG_ DIF_sysHeatPowerOptimal m50 : 16|8@1+ (0.08,0) [0|20] "kW"  Receiver
+ SG_ FrontHeatPowerOptimal2E5 : 16|8@1+ (0.08,0) [0|20.4] "kW"  Receiver
+ SG_ FrontPower2E5 : 0|11@1- (0.5,0) [-512|511.5] "kW"  Receiver
+ SG_ FrontHeatPowerMax2E5 : 24|8@1+ (0.08,0) [0|20.4] "kW"  Receiver
+ SG_ FrontPowerLimit2E5 : 48|9@1+ (1,0) [0|400] "kW"  Receiver
+ SG_ FrontHeatPower2E5 : 32|8@1+ (0.08,0) [0|20.4] "kW"  Receiver
+ SG_ FrontExcessHeatCmd : 40|8@1+ (0.08,0) [0|20] "kW"  Receiver
+ SG_ DriveRegenRating336 : 16|8@1+ (1,-100) [-100|155] "kW"  Receiver
+ SG_ DrivePowerRating336 : 0|10@1+ (1,0) [0|600] "kW"  Receiver
+ SG_ SystemRegenPowerMax268 : 32|8@1+ (1,-100) [-100|155] "kW"  Receiver
+ SG_ SystemHeatPowerMax268 : 0|8@1+ (0.08,0) [0|31875] "kW"  Receiver
+ SG_ SystemHeatPower268 : 8|8@1+ (0.08,0) [0|31875] "kW"  Receiver
+ SG_ SystemDrivePowerMax268 : 16|9@1+ (1,0) [0|511] "kW"  Receiver
+ SG_ FCMaxPowerLimit541 : 0|13@1+ (0.062256,0) [0|509.938896] "kW"  Receiver
+ SG_ FCPowerLimit244 : 0|13@1+ (0.062256,0) [0|509.938896] "kW"  Receiver
+ SG_ ChargeLinePower264 : 24|8@1+ (0.1,0) [0|25.5] "kW"  Receiver
+ SG_ BMS_hvacPowerBudget : 50|10@1+ (0.02,0) [0|20.46] "kW"  Receiver
+ SG_ BMS_maxDischargePower : 16|16@1+ (0.01,0) [0|655.35] "kW"  Receiver
+ SG_ BMS_maxRegenPower : 0|16@1+ (0.01,0) [0|655.35] "kW"  Receiver
+ SG_ BMS_maxStationaryHeatPower : 32|10@1+ (0.01,0) [0|10.23] "kW"  Receiver
+ SG_ BMSdissipation312 : 0|10@1+ (0.02,0) [0|20] "kW"  Receiver
+ SG_ RearHeatPowerMax266 : 24|8@1+ (0.08,0) [0|20] "kW"  Receiver
+ SG_ RearPowerLimit266 : 48|9@1+ (1,0) [0|400] "kW"  Receiver
+ SG_ RearHeatPower266 : 32|8@1+ (0.08,0) [0|20] "kW"  Receiver
+ SG_ RearHeatPowerOptimal266 : 16|8@1+ (0.08,0) [0|20] "kW"  Receiver
+ SG_ RearExcessHeatCmd : 40|8@1+ (0.08,0) [0|20] "kW"  Receiver
+ SG_ RearPower266 : 0|11@1- (0.5,0) [-500|500] "kW"  Receiver

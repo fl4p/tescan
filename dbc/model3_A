@@ -1,0 +1,127 @@
+ SG_ VCLEFT_liftgateStrutCurrent m1 : 11|10@1- (0.1,0) [-30|30] "A"  Receiver
+ SG_ CP_evseOutputDcCurrent : 0|15@1- (0.0732467,0) [-1200|1200] "A"  Receiver
+ SG_ PCS_dcdcLvOutputCurrent : 24|12@1+ (0.1,0) [0|400] "A"  Receiver
+ SG_ VCLEFT_hvacBlowerIPhase0 m1 : 10|8@1+ (0.2,0) [0|50] "A"  Receiver
+ SG_ VCLEFT_hvacBlowerIPhase1 m1 : 18|8@1+ (0.2,0) [0|50] "A"  Receiver
+ SG_ VCLEFT_hvacBlowerIPhase2 m1 : 26|8@1+ (0.2,0) [0|50] "A"  Receiver
+ SG_ VCRIGHT_epbMotorCurrent m0 : 5|11@1+ (0.01,0) [0|20.47] "A"  Receiver
+ SG_ VCRIGHT_epbmApplyVoltage m0 : 16|11@1+ (0.01,0) [0|20.47] "A"  Receiver
+ SG_ VCRIGHT_epbmReleaseVoltage m0 : 27|11@1+ (0.01,0) [0|20.47] "A"  Receiver
+ SG_ BMS_currentReg_targetI m5 : 49|11@1+ (0.5,0) [0|1023.5] "A"  Receiver
+ SG_ BMS_hvChain_iLimit m19 : 9|14@1+ (0.128,0) [0|2096.896] "A"  Receiver
+ SG_ BMS_loadReg_output m5 : 6|11@1- (0.1,0) [-102.4|102.3] "A"  Receiver
+ SG_ BMS_maxDcCurrentAvailable m5 : 38|11@1+ (0.5,0) [0|1023.5] "A"  Receiver
+ SG_ BMS_offsetReg_output m5 : 17|14@1- (0.1,0) [-819.2|819.1] "A"  Receiver
+ SG_ CC_currentLimit : 0|8@1+ (0.5,0) [0|127.5] "A"  Receiver
+ SG_ CC_conn1Current m1 : 8|8@1+ (0.5,0) [0|127.5] "A"  Receiver
+ SG_ CC_conn2Current m2 : 8|8@1+ (0.5,0) [0|127.5] "A"  Receiver
+ SG_ CC_conn3Current m3 : 8|8@1+ (0.5,0) [0|127.5] "A"  Receiver
+ SG_ CC_conn4Current m4 : 8|8@1+ (0.5,0) [0|127.5] "A"  Receiver
+ SG_ CP_acChargeCurrentLimit : 8|8@1+ (0.5,0) [0|127.5] "A"  Receiver
+ SG_ CP_internalMaxCurrentLimit : 16|13@1+ (0.14650226,0) [0|1200] "A"  Receiver
+ SG_ CP_acChargeCurrentLimit : 8|8@1+ (0.5,0) [0|127.5] "A"  Receiver
+ SG_ CP_internalMaxAcCurrentLimit : 32|8@1+ (0.5,0) [0|127.5] "A"  Receiver
+ SG_ CP_internalMaxDcCurrentLimit : 16|13@1+ (0.146502,0) [0|1200] "A"  Receiver
+ SG_ CP_acChargeCurrentLimit_log : 8|8@1+ (0.5,0) [0|127.5] "A"  Receiver
+ SG_ CP_internalMaxAcCurrentLimit_log : 32|8@1+ (0.5,0) [0|127.5] "A"  Receiver
+ SG_ CP_internalMaxDcCurrentLimit_log : 16|13@1+ (0.14650226,0) [0|1200] "A"  Receiver
+ SG_ CP_cableCurrentLimit : 24|7@1+ (1,0) [0|127] "A"  Receiver
+ SG_ CP_pilotCurrent : 8|8@1+ (0.5,0) [0|127.5] "A"  Receiver
+ SG_ CP_doorI m2 : 16|12@1+ (0.0025,0) [0|10.2375] "A"  Receiver
+ SG_ CP_doorLastRequestMaxI m2 : 28|12@1+ (0.0025,0) [0|10.2375] "A"  Receiver
+ SG_ CP_latch2I m3 : 16|12@1+ (0.0025,0) [0|10.2375] "A"  Receiver
+ SG_ CP_latchI m3 : 4|12@1+ (0.0025,0) [0|10.2375] "A"  Receiver
+ SG_ HVP_fcContCoilCurrent m4 : 4|12@1+ (0.1,0) [0|7.5] "A"  Receiver
+ SG_ HVP_packContCoilCurrent m5 : 24|12@1+ (0.1,0) [0|7.5] "A"  Receiver
+ SG_ HVP_shuntAuxCurrentDbg m6 : 8|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ HVP_shuntCurrentDebug m0 : 40|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ PTC_leftCurrentHV : 48|8@1+ (0.2,0) [0|50] "A"  Receiver
+ SG_ PTC_rightCurrentHV : 56|8@1+ (0.2,0) [0|50] "A"  Receiver
+ SG_ UI_acChargeCurrentLimit : 8|7@1+ (1,0) [0|127] "A"  Receiver
+ SG_ PCS_chgPhAInputIrms m0 : 5|9@1+ (0.1,0) [0|51.1] "A"  Receiver
+ SG_ PCS_chgPhAMachineStatorCurrent m23 : 16|8@1- (0.2,0) [-25.6|25.4] "A"  Receiver
+ SG_ PCS_chgPhAOutputI m0 : 32|8@1+ (0.1,0) [0|25.5] "A"  Receiver
+ SG_ PCS_chgPhBInputIrms m1 : 5|9@1+ (0.1,0) [0|51.1] "A"  Receiver
+ SG_ PCS_chgPhBMachineStatorCurrent m23 : 35|8@1- (0.2,0) [-25.6|25.4] "A"  Receiver
+ SG_ PCS_chgPhBOutputI m1 : 32|8@1+ (0.1,0) [0|25.5] "A"  Receiver
+ SG_ PCS_chgPhCInputIrms m2 : 5|9@1+ (0.1,0) [0|51.1] "A"  Receiver
+ SG_ PCS_chgPhCMachineStatorCurrent m23 : 54|8@1- (0.2,0) [-25.6|25.4] "A"  Receiver
+ SG_ PCS_chgPhCOutputI m2 : 32|8@1+ (0.1,0) [0|25.5] "A"  Receiver
+ SG_ PCS_chgPhManCurrentToDist m5 : 44|10@1+ (0.1,0) [0|100] "A"  Receiver
+ SG_ PCS_dcdcCurrentLimit m6 : 20|12@1+ (0.1,0) [0|400] "A"  Receiver
+ SG_ PCS_dcdcIntervalMaxLvOutputCurr m18 : 48|12@1+ (1,0) [0|400] "A"  Receiver
+ SG_ PCS_dcdcIntervalMinLvOutputCurr m19 : 48|12@1+ (1,0) [0|400] "A"  Receiver
+ SG_ PCS_dcdcLvOutputCurrentTempLimit m6 : 32|12@1+ (0.1,0) [0|400] "A"  Receiver
+ SG_ PCS_dcdcMaxLvOutputCurrent m6 : 8|12@1+ (0.1,0) [0|400] "A"  Receiver
+ SG_ DIR_currentLimit m41 : 32|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ DIR_dcCableCurrentEst m37 : 16|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIR_motorIA m32 : 16|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ DIR_motorIAavg m38 : 32|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIR_motorIB m32 : 32|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ DIR_motorIBavg m38 : 48|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIR_motorIC m32 : 48|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ DIR_offsetA m32 : 8|8@1- (0.1,0) [-12.8|12.7] "A"  Receiver
+ SG_ DIR_offsetB m33 : 8|8@1- (0.1,0) [-12.8|12.7] "A"  Receiver
+ SG_ DIR_peakIQref m38 : 16|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ DIR_statorIDfdb m33 : 32|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIR_statorIDref m33 : 16|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIR_statorIQfdb m34 : 32|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIR_statorIQref m34 : 16|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIR_wasteCurrentLimit m41 : 48|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ DIF_currentLimit m41 : 32|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ DIF_dcCableCurrentEst m37 : 16|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIF_motorIA m32 : 16|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ DIF_motorIAavg m38 : 32|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIF_motorIB m32 : 32|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ DIF_motorIBavg m38 : 48|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIF_motorIC m32 : 48|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ DIF_offsetA m32 : 8|8@1- (0.1,0) [-12.8|12.7] "A"  Receiver
+ SG_ DIF_offsetB m33 : 8|8@1- (0.1,0) [-12.8|12.7] "A"  Receiver
+ SG_ DIF_peakIQref m38 : 16|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ DIF_statorIDfdb m33 : 32|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIF_statorIDref m33 : 16|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIF_statorIQfdb m34 : 32|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIF_statorIQref m34 : 16|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ DIF_wasteCurrentLimit m41 : 48|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_EPAS3PCurrent m4 : 47|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_EPAS3SCurrent m5 : 47|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_ESPMotorCurrent m6 : 47|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_ESPValveCurrent m7 : 44|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_PCSCurrent m2 : 47|16@1- (0.1,0) [-3276.8|3276.7] "A"  Receiver
+ SG_ VCFRONT_autopilot1Current m8 : 43|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_autopilot2Current m9 : 43|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_headlampLeftCurrent m12 : 10|10@1+ (0.1,0) [0|102.3] "A"  Receiver
+ SG_ VCFRONT_headlampRightCurrent m12 : 30|10@1+ (0.1,0) [0|102.3] "A"  Receiver
+ SG_ VCFRONT_iBoosterCurrent m3 : 47|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_leftControllerCurrent m1 : 47|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_pump1AndFanCurrent m14 : 6|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_pump2AndAirCompCurrent m14 : 35|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_rightControllerCurrent m0 : 47|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_sleepBypassCurrent m10 : 26|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_uiAudioCurrent m11 : 8|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_uiCurrent m11 : 32|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCFRONT_vbatFusedHighCurrent m13 : 46|16@1+ (0.1,0) [0|6553.5] "A"  Receiver
+ SG_ VCRIGHT_cabinTempFanCurrent m9 : 15|6@1- (0.001,0) [-0.01|0.05] "A"  Receiver
+ SG_ VCFRONT_coolantValveISense m2 : 56|7@1+ (0.01,0) [0|1.2] "A"  Receiver
+ SG_ VCFRONT_radarHeaterCurrent m6 : 8|8@1+ (0.1,0) [0|25.5] "A"  Receiver
+ SG_ VCFRONT_radiatorFanPhaseCurrent m1 : 32|8@1+ (0.25,-10) [-10|50] "A"  Receiver
+ SG_ VCFRONT_radiatorFanPhaseIMax m1 : 40|7@1+ (0.25,0) [5|35] "A"  Receiver
+ SG_ VCFRONT_solenoidEvapCurrent m3 : 58|6@1+ (0.04,0) [0|2.4] "A"  Receiver
+ SG_ FrontOilPumpPhaseCurrent396 : 56|8@1+ (0.1,0) [0|25.4] "A"  Receiver
+ SG_ DIR_oilPumpPhaseCurrent : 32|8@1+ (0.1,0) [0|25.4] "A"  Receiver
+ SG_ MaxDischargeCurrent2D2 : 48|14@1+ (0.128,0) [0|2096.896] "A"  Receiver
+ SG_ MaxChargeCurrent2D2 : 32|14@1+ (0.1,0) [0|1638.2] "A"  Receiver
+ SG_ FCMaxCurrentLimit541 : 16|13@1+ (0.073242,0) [0|599.925222] "A"  Receiver
+ SG_ FCCurrentLimit244 : 16|13@1+ (0.073242,0) [0|599.925222] "A"  Receiver
+ SG_ FC_dcCurrent : 32|14@1- (0.0732422,0) [-600|599.927] "A"  Receiver
+ SG_ FC_minCurrentLimit : 16|13@1+ (0.1,0) [0|600] "A"  Receiver
+ SG_ v12vBattCurrent261 : 48|16@1- (0.005,0) [-163.84|163.835] "A"  Receiver
+ SG_ ChargeLineCurrentLimit264 : 32|10@1+ (0.1,0) [0|102.3] "A"  Receiver
+ SG_ ChargeLineCurrent264 : 14|9@1+ (0.1,0) [0|51.1] "A"  Receiver
+ SG_ DCDCoutputCurrent224 : 16|12@1+ (0.1,0) [0|409.5] "A"  Receiver
+ SG_ DCDCoutputCurrentMax224 : 29|12@1+ (0.1,0) [0|409.5] "A"  Receiver
+ SG_ CMPD_inputHVCurrent : 32|9@1+ (0.1,0) [0|50] "A"  Receiver
+ SG_ RawBattCurrent132 : 32|14@1- (-0.05,2) [-1138.35|2138.4] "A" Receiver
+ SG_ SmoothBattCurrent132 : 16|16@1- (-0.1,0) [-3276.7|3276.7] "A"  Receiver
+ SG_ RearMotorCurrent126 : 10|11@1+ (1,0) [0|2047] "A"  Receiver
+ SG_ FrontMotorCurrent1A5 : 10|11@1+ (1,0) [0|2047] "A"  Receiver
